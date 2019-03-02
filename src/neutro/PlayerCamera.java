@@ -1,12 +1,31 @@
 package neutro;
 
 import atlas.objects.Camera;
+import atlas.userInput.Controller;
 import atlas.userInput.Keys;
 import atlas.userInput.UserInput;
 
 public class PlayerCamera extends Camera {
 	public void update(float interval) {
+		Controller controller = UserInput.getControllers().get(0);
 		float camRot = (float) (this.getRotation().y/180*Math.PI);
+		//controller - left stick - movement
+		if(Math.abs(controller.getLeftJoyStickVert())>0.1) {
+			this.getPosition().x -= 10*interval*Math.cos(camRot)*controller.getLeftJoyStickVert();
+			this.getPosition().z -= 10*interval*Math.sin(camRot)*controller.getLeftJoyStickVert();
+		}
+		if(Math.abs(controller.getLeftJoyStickHorz())>0.1) {
+			this.getPosition().x -= 10*interval*Math.sin(camRot)*controller.getLeftJoyStickHorz();
+			this.getPosition().z += 10*interval*Math.cos(camRot)*controller.getLeftJoyStickHorz();
+		}
+		//controller - right stick - rotation
+		if(Math.abs(controller.getRightJoyStickHorz())>0.1) {
+			this.getRotation().y += controller.getRightJoyStickHorz()*2;
+		}
+		if(Math.abs(controller.getRightJoyStickVert())>0.1) {
+			this.getRotation().x += controller.getRightJoyStickVert()*2;
+		}
+		//WASD directions
 		if(UserInput.keyDown(Keys.KEY_W)) {
 			this.getPosition().x += 10*interval*Math.cos(camRot);
 			this.getPosition().z += 10*interval*Math.sin(camRot);
