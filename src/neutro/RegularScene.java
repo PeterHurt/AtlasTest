@@ -41,20 +41,20 @@ public class RegularScene extends Scene {
 			// TODO Auto-generated catch block
 			fern.printStackTrace();
 		}
-		try {
-			Mesh sphereMesh = Loader.getMesh(cl, "Sphere_265_128.obj");
-			sphereMesh.setRenderBothSides(true);
-			//Texture sphereTexture = Loader.getTexture(cl, "texture.png");
-			sphere = new Entity(sphereMesh); 
-			//sphere.setMaterial(new Material(sphereTexture));
-			//sphereTexture.setAtlasSize(2);
-			this.addEntity(sphere);
-			sphere.setPosition(20, -5, 10);
-			sphere.setSelectedTextureAtlas(2);
-		} catch (Exception sphere) {
-			// TODO Auto-generated catch block
-			sphere.printStackTrace();
-		}
+//		try {
+//			Mesh sphereMesh = Loader.getMesh(cl, "Sphere_265_128.obj");
+//			sphereMesh.setRenderBothSides(true);
+//			//Texture sphereTexture = Loader.getTexture(cl, "texture.png");
+//			sphere = new Entity(sphereMesh); 
+//			//sphere.setMaterial(new Material(sphereTexture));
+//			//sphereTexture.setAtlasSize(2);
+//			this.addEntity(sphere);
+//			sphere.setPosition(20, -5, 10);
+//			sphere.setSelectedTextureAtlas(2);
+//		} catch (Exception sphere) {
+//			// TODO Auto-generated catch block
+//			sphere.printStackTrace();
+//		}
 		this.cameras.clear();
 		c = new PlayerCamera();
 		this.cameras.add(c);
