@@ -52,7 +52,6 @@ public class RegularScene extends Scene {
 //			sphere.setPosition(20, -5, 10);
 //			sphere.setSelectedTextureAtlas(2);
 //		} catch (Exception sphere) {
-//			// TODO Auto-generated catch block
 //			sphere.printStackTrace();
 //		}
 		this.cameras.clear();

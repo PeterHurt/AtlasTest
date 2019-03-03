@@ -6,14 +6,10 @@ import atlas.userInput.Keys;
 import atlas.userInput.UserInput;
 
 public class PlayerCamera extends Camera {
-//	public void fixedUpdate() {
-//		System.out.println("Test");
-//		
-//	}
 	public void update(float interval) {
 		float camRot = (float) (this.getRotation().y/180*Math.PI);
 		Controller controller = null;
-		try {
+		if (UserInput.getControllers().size() > 0) {
 			controller = UserInput.getControllers().get(0);
 			//controller - left stick - movement
 			if(Math.abs(controller.getLeftJoyStickVert())>0.1) {
@@ -31,8 +27,6 @@ public class PlayerCamera extends Camera {
 			if(Math.abs(controller.getRightJoyStickVert())>0.1) {
 				this.getRotation().x += controller.getRightJoyStickVert()*2;
 			}
-		} catch (IndexOutOfBoundsException e) {
-			System.err.println("Controller not detected: " + e.getMessage());
 		}
 		//WASD directions
 		if (controller == null || (controller.getLeftJoyStickVert()<0.1 && controller.getLeftJoyStickVert()>-0.1)) {
