@@ -6,41 +6,52 @@ import atlas.userInput.Keys;
 import atlas.userInput.UserInput;
 
 public class PlayerCamera extends Camera {
+//	public void fixedUpdate() {
+//		System.out.println("Test");
+//		
+//	}
 	public void update(float interval) {
-		Controller controller = UserInput.getControllers().get(0);
 		float camRot = (float) (this.getRotation().y/180*Math.PI);
-		//controller - left stick - movement
-		if(Math.abs(controller.getLeftJoyStickVert())>0.1) {
-			this.getPosition().x -= 10*interval*Math.cos(camRot)*controller.getLeftJoyStickVert();
-			this.getPosition().z -= 10*interval*Math.sin(camRot)*controller.getLeftJoyStickVert();
-		}
-		if(Math.abs(controller.getLeftJoyStickHorz())>0.1) {
-			this.getPosition().x -= 10*interval*Math.sin(camRot)*controller.getLeftJoyStickHorz();
-			this.getPosition().z += 10*interval*Math.cos(camRot)*controller.getLeftJoyStickHorz();
-		}
-		//controller - right stick - rotation
-		if(Math.abs(controller.getRightJoyStickHorz())>0.1) {
-			this.getRotation().y += controller.getRightJoyStickHorz()*2;
-		}
-		if(Math.abs(controller.getRightJoyStickVert())>0.1) {
-			this.getRotation().x += controller.getRightJoyStickVert()*2;
+		Controller controller = null;
+		try {
+			controller = UserInput.getControllers().get(0);
+			//controller - left stick - movement
+			if(Math.abs(controller.getLeftJoyStickVert())>0.1) {
+				this.getPosition().x -= 10*interval*Math.cos(camRot)*controller.getLeftJoyStickVert();
+				this.getPosition().z -= 10*interval*Math.sin(camRot)*controller.getLeftJoyStickVert();
+			}
+			if(Math.abs(controller.getLeftJoyStickHorz())>0.1) {
+				this.getPosition().x -= 10*interval*Math.sin(camRot)*controller.getLeftJoyStickHorz();
+				this.getPosition().z += 10*interval*Math.cos(camRot)*controller.getLeftJoyStickHorz();
+			}
+			//controller - right stick - rotation
+			if(Math.abs(controller.getRightJoyStickHorz())>0.1) {
+				this.getRotation().y += controller.getRightJoyStickHorz()*2;
+			}
+			if(Math.abs(controller.getRightJoyStickVert())>0.1) {
+				this.getRotation().x += controller.getRightJoyStickVert()*2;
+			}
+		} catch (IndexOutOfBoundsException e) {
+			System.err.println("Controller not detected: " + e.getMessage());
 		}
 		//WASD directions
-		if(UserInput.keyDown(Keys.KEY_W)) {
-			this.getPosition().x += 10*interval*Math.cos(camRot);
-			this.getPosition().z += 10*interval*Math.sin(camRot);
-		}
-		if(UserInput.keyDown(Keys.KEY_S)) {
-			this.getPosition().x -= 10*interval*Math.cos(camRot);
-			this.getPosition().z -= 10*interval*Math.sin(camRot);
-		}
-		if(UserInput.keyDown(Keys.KEY_A)) {
-			this.getPosition().x += 10*interval*Math.sin(camRot);
-			this.getPosition().z -= 10*interval*Math.cos(camRot);
-		}
-		if(UserInput.keyDown(Keys.KEY_D)) {
-			this.getPosition().x -= 10*interval*Math.sin(camRot);
-			this.getPosition().z += 10*interval*Math.cos(camRot);
+		if (controller == null || (controller.getLeftJoyStickVert()<0.1 && controller.getLeftJoyStickVert()>-0.1)) {
+			if(UserInput.keyDown(Keys.KEY_W)) {
+				this.getPosition().x += 10*interval*Math.cos(camRot);
+				this.getPosition().z += 10*interval*Math.sin(camRot);
+			}
+			if(UserInput.keyDown(Keys.KEY_S)) {
+				this.getPosition().x -= 10*interval*Math.cos(camRot);
+				this.getPosition().z -= 10*interval*Math.sin(camRot);
+			}
+			if(UserInput.keyDown(Keys.KEY_A)) {
+				this.getPosition().x += 10*interval*Math.sin(camRot);
+				this.getPosition().z -= 10*interval*Math.cos(camRot);
+			}
+			if(UserInput.keyDown(Keys.KEY_D)) {
+				this.getPosition().x -= 10*interval*Math.sin(camRot);
+				this.getPosition().z += 10*interval*Math.cos(camRot);
+			}
 		}
 //		if(UserInput.getDisplVec()) {
 //			this.getRotation().x -= 60*interval;
