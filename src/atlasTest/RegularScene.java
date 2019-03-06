@@ -1,4 +1,4 @@
-package neutro;
+package atlasTest;
 
 import atlas.engine.Scene;
 import atlas.graphical.Texture;

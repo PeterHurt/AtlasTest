@@ -1,4 +1,4 @@
-package neutro;
+package atlasTest;
 
 import atlas.objects.Camera;
 import atlas.userInput.Controller;

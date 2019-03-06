@@ -1,10 +1,10 @@
-package neutro;
+package atlasTest;
 
 import atlas.engine.AGame;
 import atlas.engine.Engine;
 import atlas.userInput.UserInput;
 
-public class Neutro extends AGame {
+public class AtlasTest extends AGame {
 	@Override
 	protected void init() {
 		Engine.showFPSinWindowTitle = true;
